@@ -3,7 +3,8 @@ class ToyComponent {
     public templateUrl
     constructor(){
         this.bindings = {
-            toy: '<'
+            toy: '<',
+            onSelect: '&'
         }
         this.templateUrl = './js/components/toy.component.html'
     }    

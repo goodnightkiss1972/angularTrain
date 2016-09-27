@@ -1,5 +1,7 @@
 <article
   class="toy"
+  ng-click="$ctrl.onSelect({toy: $ctrl.toy})"
+  ng-class="{selected: $ctrl.toy.selected}"
 >
   <i class="mdi mdi-{{$ctrl.toy.icon}}"></i>
 </article>
