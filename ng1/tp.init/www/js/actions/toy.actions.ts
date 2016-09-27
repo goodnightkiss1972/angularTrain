@@ -15,7 +15,9 @@ class ToyActions {
     }
 
     public getToys = () => {
-        return dispatch => {
+        return (dispatch, getState) => {
+            const toys = getState()
+            if (toys.toyReducer.toys && toys.toyReducer.toys.length) { return }
             this.toyService.getToys().then(resultat => {
                 dispatch({
                     type: TOY.RESPONSE,
