@@ -11,7 +11,7 @@ import BasketContainer from './containers/basket.container'
 import CheckoutContainer from './containers/checkout.container'
 import ToyService from './services/toy.service'
 import ToyComponent from './components/toy.component'
-import ToyAction from './actions/toy.actions'
+import ToyActions from './actions/toy.actions'
 
 angular.module('ToyStore', [
   'ui.router',
@@ -22,9 +22,10 @@ angular.module('ToyStore', [
   .component('toyContainer', new ToyContainer())
   .component('basketContainer', new BasketContainer())
   .component('checkoutContainer', new CheckoutContainer())
+
   .component('toyComponent', new ToyComponent())
-  .service('ToyService', ToyService)
-  .service('ToyActions', ToyAction)
+  .service ('ToyService', ToyService)
+  .service ('ToyActions', ToyActions)
   .config(Config)
 
 angular.bootstrap(document.documentElement, ['ToyStore'])

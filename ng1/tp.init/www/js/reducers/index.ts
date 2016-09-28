@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import toyReducer from './toy.reducer'
+
+import toyReducer from './toy.reducer' 
 
 const rootReducer = combineReducers({
-    toyReducer
+  toyReducer
 })
 
 export default rootReducer

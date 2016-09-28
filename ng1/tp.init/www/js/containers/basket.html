@@ -1,19 +1,19 @@
 <main class="basket">
 
-  <article>
-    <i class="mdi mdi-plane"></i>
-    <strong>Plane</strong>
-    <i class="mdi mdi-close-circle"></i>
-    <span>1&euro;</span>
+  <article ng-repeat="toy in $ctrl.toys">
+    <i class="mdi mdi-{{toy.icon}}"></i>
+    <strong>{{toy.title}}</strong>
+    <i class="mdi mdi-close-circle" ng-click="$ctrl.delete(toy)"></i>
+    <span>{{toy.price}} &euro;</span>
   </article>
 
   <aside>
     <strong>Total :</strong>
-    <span>10euros</span>
+    <span>{{$ctrl.total}} euros</span>
   </aside>
 
   <footer>
-    <button>Checkout Order</button>
+    <button ng-click="$ctrl.goToCheckout()">Checkout Order</button>
   </footer>
 
 </main>

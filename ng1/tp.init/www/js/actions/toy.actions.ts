@@ -1,32 +1,42 @@
 export const TOY = {
-SELECTED: 'TOY_SELECTED',
-RESPONSE: 'TOY_RESPONSE'
+  SELECTED: 'TOY_SELECTED',
+  RESPONSE: 'TOY_RESPONSE'
 }
-// constante représentant chaque action
 
 class ToyActions {
-    constructor(private toyService) {}
+  constructor(
+    private $state,
+    private toyService
+  ) {}
 
-    public selectToy = toy => {
-        return {
-            type: TOY.SELECTED,
-            payload: toy
-        }
+  public selectToy = toy => {
+    return (dispatch, getState) => {
+      dispatch({
+        type: TOY.SELECTED,
+        payload: toy
+      })
+      const state = getState()
+      if (!state.toyReducer.total) {
+        this.$state.go('toys')
+      }
     }
+  }
 
-    public getToys = () => {
-        return (dispatch, getState) => {
-            const toys = getState()
-            if (toys.toyReducer.toys && toys.toyReducer.toys.length) { return }
-            this.toyService.getToys().then(resultat => {
-                dispatch({
-                    type: TOY.RESPONSE,
-                    toys: resultat
-                })
-            })
-        }
-    }
+  public getToys = () => {
+   return (dispatch, getState) => {
+     const toys = getState()
+     if (toys.toyReducer.toys && toys.toyReducer.toys.length) { return }
+
+     this.toyService.getToys().then(resultat => {
+       dispatch({
+         type: TOY.RESPONSE,
+         toys: resultat
+       })
+     }) 
+
+   } 
+  }
 }
 
-ToyActions.$inject = ['ToyService']
+ToyActions.$inject = ['$state', 'ToyService']
 export default ToyActions

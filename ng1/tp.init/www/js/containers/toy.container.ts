@@ -1,25 +1,20 @@
 class ToyController {
 
   public toys
-  private disconnect
 
   constructor(
-    private $ngredux,
+    private $ngRedux,
     private toyActions
-  )   {
-  }
+  ) {}
 
   public $onInit = () => {
-    this.disconnect = this.$ngredux.connect(this.mapStateToThis, () => {})(this)
-    this.$ngredux.dispatch(this.toyActions.getToys())   
+    this.$ngRedux.connect(this.mapStateToThis, () => {})(this)
+    this.$ngRedux.dispatch(this.toyActions.getToys())
   }
-  public $onDestroy = () => {
-    this.disconnect()
+  public select = toy => {
+    this.$ngRedux.dispatch(this.toyActions.selectToy(toy))
   }
 
-  public select = toy => {
-    this.$ngredux.dispatch(this.toyActions.selectToy(toy))
-  }
   private mapStateToThis = state => {
     return {
       toys: state.toyReducer.toys
@@ -36,6 +31,5 @@ class ToyContainer {
   }
 }
 
-ToyController.$inject = ['$ngRedux','ToyActions'] //plus besoin du service
-
+ToyController.$inject = ['$ngRedux', 'ToyActions']
 export default ToyContainer

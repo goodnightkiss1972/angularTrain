@@ -1,24 +1,35 @@
 class BasketController {
-  public count
+  public toys
+  public total
   private disconnect
-  
+
   constructor(
     private $ngRedux,
-    private $state
-  ) { }
+    private $state,
+    private toyActions
+  ) {}
 
   public $onInit = () => {
-    this.disconnect = this.$ngRedux.connect(this.mapStateToThis, () => { })(this)
+    this.disconnect = this.$ngRedux.connect(this.mapStateToThis, () => {})(this)
   }
   public $onDestroy = () => {
     this.disconnect()
   }
+
   public goToCheckout = () => {
-      this.$state.go('checkout')
+    this.$state.go('checkout')
   }
+
+  public delete = toy => {
+    this.$ngRedux.dispatch(this.toyActions.selectToy(toy))
+  }
+
   private mapStateToThis = state => {
     return {
-
+      toys: state.toyReducer.toys.filter(item => {
+        return item.selected
+      }),
+      total: state.toyReducer.total
     }
   }
 }
@@ -31,7 +42,5 @@ class BasketContainer {
     this.templateUrl = './js/containers/basket.html'
   }
 }
-
-BasketController.$inject = ['$ngRedux', '$state']
-
+BasketController.$inject = ['$ngRedux', '$state', 'ToyActions']
 export default BasketContainer
